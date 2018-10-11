@@ -5,10 +5,10 @@
     ViewData["Title"] = "Edit Customer";
 }
 
-<h1>Edit Customer - @Model.Customer.Id</h1>
+<h1>Edit Customer - @Model.Id</h1>
 <form method="post">
     <div asp-validation-summary="All"></div>
-    <input asp-for="Customer.Id" type="hidden" />
+    <input asp-for="Id" />
     <div>
         <label asp-for="Customer.Name"></label>
         <div>

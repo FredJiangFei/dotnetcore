@@ -21,6 +21,9 @@ namespace MyWebApp.Pages.Contact
         [BindProperty]
         public Customer Customer { get; set; }
 
+        [BindProperty(SupportsGet = true)]
+        public int Id { get; set; }
+
         public async Task<IActionResult> OnGetAsync(int id)
         {
             Customer = await _db.Customers.FindAsync(id);
