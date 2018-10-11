@@ -18,7 +18,7 @@ namespace TodoApi
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
+            WebHost.CreateDefaultBuilder(args) // sets the content root to the current directory
                 .UseStartup<Startup>();
     }
 }
