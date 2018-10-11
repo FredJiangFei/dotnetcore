@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using RazorPagesContacts.Data;
 
-namespace MyWebApp.Pages
+namespace MyWebApp.Pages.Contact
 {
     public class EditModel : PageModel
     {
@@ -27,7 +27,7 @@ namespace MyWebApp.Pages
 
             if (Customer == null)
             {
-                return RedirectToPage("/Index");
+                return RedirectToPage("./Index");
             }
 
             return Page();
@@ -51,7 +51,7 @@ namespace MyWebApp.Pages
                 throw new Exception($"Customer {Customer.Id} not found!");
             }
 
-            return RedirectToPage("/Index");
+            return RedirectToPage("./Index");
         }
     }
 }

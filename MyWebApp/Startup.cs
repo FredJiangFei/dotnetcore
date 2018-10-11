@@ -34,8 +34,13 @@ namespace MyWebApp
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-             services.AddDbContext<AppDbContext>(options =>
-                              options.UseInMemoryDatabase("name"));
+            services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("name"));
+            // services.AddMvc().AddRazorPagesOptions(options =>
+            // {
+            //     options.RootDirectory = "/Contact";
+            //     options.Conventions.AuthorizeFolder("/Contact/Admin");
+            //     // options.Conventions.AddPageRoute("/Contact/Index", "");
+            // }).WithRazorPagesAtContentRoot();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
