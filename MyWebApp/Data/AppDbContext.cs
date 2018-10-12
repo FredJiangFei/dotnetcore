@@ -10,5 +10,6 @@ namespace RazorPagesContacts.Data
         }
 
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Movie> Movie { get; set; }
     }
 }

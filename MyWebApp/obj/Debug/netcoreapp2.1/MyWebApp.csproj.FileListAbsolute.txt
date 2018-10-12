@@ -29,3 +29,4 @@ E:\dotnetcore\MyWebApp\obj\Debug\netcoreapp2.1\Razor\Pages\Contact\Create.g.csht
 E:\dotnetcore\MyWebApp\obj\Debug\netcoreapp2.1\Razor\Pages\Contact\Edit.g.cshtml.cs
 E:\dotnetcore\MyWebApp\obj\Debug\netcoreapp2.1\Razor\Pages\Contact\Index.g.cshtml.cs
 E:\dotnetcore\MyWebApp\obj\Debug\netcoreapp2.1\Razor\Pages\Index.g.cshtml.cs
+E:\dotnetcore\MyWebApp\obj\Debug\netcoreapp2.1\Razor\Pages\Movies\Index.g.cshtml.cs
