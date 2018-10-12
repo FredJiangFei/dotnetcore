@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RazorPagesContacts.Data;
+using SignalRChat.Hubs;
 
 namespace MyWebApp
 {
@@ -41,6 +42,8 @@ namespace MyWebApp
                 // options.Conventions.AuthorizeFolder("/Contact/Admin");
                 // options.Conventions.AddPageRoute("/Contact/Index", "");
             }); //.WithRazorPagesAtContentRoot();
+
+            services.AddSignalR();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -58,7 +61,10 @@ namespace MyWebApp
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<ChatHub>("/chatHub");
+            });
             app.UseMvc();
         }
     }
