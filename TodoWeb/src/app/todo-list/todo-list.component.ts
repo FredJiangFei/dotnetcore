@@ -24,7 +24,6 @@ export class TodoListComponent implements OnInit {
   add(name: string) {
     this.todoService.add(name).subscribe(() => this.getAll());
   }
-  edit(item: Todo) {}
   delete(item: Todo) {
     this.todoService.delete(item.id).subscribe(() => this.getAll());
   }

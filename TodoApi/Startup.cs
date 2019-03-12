@@ -28,17 +28,28 @@ namespace TodoApi
 
         public IConfiguration Configuration { get; }
 
+        // Add/config services in container
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<TodoContext>(opt => opt.UseInMemoryDatabase("TodoList"));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddScoped<ITodoService, TodoService>();
             services.AddDirectoryBrowser();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.WithOrigins("http://localhost:4200")
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials());
+            });
         }
 
+        // How application will response to a HTTP request
+        // User middleware config HTTP request pipeline
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
+            if (!env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
@@ -47,14 +58,13 @@ namespace TodoApi
                 app.UseHsts();
             }
 
+            // app.UseStatusCodePages();
+
             // redirect HTTP requests to HTTPS
             app.UseHttpsRedirection();
 
             // Fix No 'Access-Control-Allow-Origin' header is present on the requested resource.
-            app.UseCors(x => x.WithOrigins("http://localhost:4200")
-                        .AllowAnyMethod()
-                        .AllowAnyHeader()
-                        .AllowCredentials());
+            app.UseCors("CorsPolicy");
 
             //添加一个默认页面
             // var options = new DefaultFilesOptions();
@@ -105,6 +115,19 @@ namespace TodoApi
                 FileProvider = new PhysicalFileProvider(filePath),
                 RequestPath = "/StaticFiles",
                 EnableDirectoryBrowsing = true // DirectoryBrowser 可用
+            });
+
+
+            // UseDeveloperExceptionPage 显示develop error page
+            app.Run((context) =>
+            {
+                throw new Exception("Example exception");
+            });
+
+            // Response "Hello World!"
+            app.Run(async (context) =>
+            {
+                await context.Response.WriteAsync("Hello World!");
             });
         }
     }

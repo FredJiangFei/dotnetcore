@@ -8,15 +8,11 @@
     <th>Is Complete</th>
     <th>Name</th>
     <th></th>
-    <th></th>
   </tr>
   <tbody>
     <tr *ngFor="let item of (todos$ | async)">
       <td>{{ item.isComplete }}</td>
       <td>{{ item.name }}</td>
-      <td>
-        <button (click)="edit(item)">Edit</button>
-      </td>
       <td>
         <button (click)="delete(item)">Delete</button>
       </td>
