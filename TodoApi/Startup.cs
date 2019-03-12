@@ -46,22 +46,24 @@ namespace TodoApi
                 app.UseHsts();
             }
 
+            // redirect HTTP requests to HTTPS
             app.UseHttpsRedirection();
 
-            DefaultFilesOptions options = new DefaultFilesOptions();
-            options.DefaultFileNames.Clear();
-            options.DefaultFileNames.Add("mydefault.html");
-
-            // UseDefaultFiles must be called before UseStaticFiles to serve the default file. 
+            //添加一个默认页面
+            // var options = new DefaultFilesOptions();
+            // options.DefaultFileNames.Clear();
+            // options.DefaultFileNames.Add("mydefault.html");
             app.UseDefaultFiles(); // marks the files in web root as servable. 
-            app.UseStaticFiles();
+            app.UseStaticFiles(); // 让 wwwroot下的文件可访问
 
+            // 配置路由中间件，添加MVC作为默认的handler
             app.UseMvc();
 
             app.UseStaticFiles(new StaticFileOptions
             {
                 OnPrepareResponse = ctx =>
                 {
+                    // 设置 http response headers
                     ctx.Context.Response.Headers.Append("Cache-Control", $"public, max-age=600");
                     // if (ctx.Context.User.Identity.IsAuthenticated)
                     // {
@@ -72,12 +74,30 @@ namespace TodoApi
                 }
             });
 
+            // 让图片可以在浏览器 访问
+            // services.AddDirectoryBrowser();
+            var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images");
+            // 可访问图片文件
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(imagePath),
+                RequestPath = "/MyImages"
+            });
+            // 可访问文件夹
+            app.UseDirectoryBrowser(new DirectoryBrowserOptions
+            {
+                FileProvider = new PhysicalFileProvider(imagePath),
+                RequestPath = "/MyImages"
+            });
+
+
+            // UseFileServer 是 UseStaticFiles, UseDefaultFiles 和 UseDirectoryBrowser 功能的组合
             var filePath = Path.Combine(Directory.GetCurrentDirectory(), "MyStaticFiles");
             app.UseFileServer(new FileServerOptions
             {
                 FileProvider = new PhysicalFileProvider(filePath),
                 RequestPath = "/StaticFiles",
-                EnableDirectoryBrowsing = true
+                EnableDirectoryBrowsing = true // DirectoryBrowser 可用
             });
         }
     }

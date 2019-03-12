@@ -20,10 +20,10 @@ namespace TodoApi
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args) // sets the content root to the current directory
-                .ConfigureServices(services =>
-                {
-                    services.AddTransient<IStartupFilter, RequestSetOptionsStartupFilter>();
-                })
+                                               // .ConfigureServices(services =>
+                                               // {
+                                               //     services.AddTransient<IStartupFilter, RequestSetOptionsStartupFilter>();
+                                               // })
                 .UseStartup<Startup>();
     }
 }

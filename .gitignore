@@ -10,8 +10,6 @@
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
-
-
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
@@ -238,6 +236,14 @@ FakesAssemblies/
 # Visual Studio 6 workspace options file
 *.opt
 
+# Visual Studio LightSwitch build output
+**/*.HTMLClient/GeneratedArtifacts
+**/*.DesktopClient/GeneratedArtifacts
+**/*.DesktopClient/ModelManifest.xml
+**/*.Server/GeneratedArtifacts
+**/*.Server/ModelManifest.xml
+_Pvt_Extensions
+
 # Paket dependency manager
 .paket/paket.exe
 paket-files/
@@ -248,3 +254,17 @@ paket-files/
 # JetBrains Rider
 .idea/
 *.sln.iml
+
+# HeartBeat custom
+nugetfeed/*.nupkg
+**/frontend/dist
+*.nunit
+*.orig
+src/IC.Core.PCChannelAdapter.Services/*.xml
+*/azure-credentials.json
+**/Salary.Web/dist
+/src/IC.HeartBeat.Web/testReport.xml
+/src/IC.HeartBeat.Web/wwwroot/
+package-lock.json
+/src/TimeMachine.sql
+/src/IC.HeartBeat.Web/src/e2e/dist
