@@ -32,6 +32,7 @@ namespace TodoApi
         {
             services.AddDbContext<TodoContext>(opt => opt.UseInMemoryDatabase("TodoList"));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddScoped<ITodoService, TodoService>();
             services.AddDirectoryBrowser();
         }
 
@@ -48,6 +49,12 @@ namespace TodoApi
 
             // redirect HTTP requests to HTTPS
             app.UseHttpsRedirection();
+
+            // Fix No 'Access-Control-Allow-Origin' header is present on the requested resource.
+            app.UseCors(x => x.WithOrigins("http://localhost:4200")
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials());
 
             //添加一个默认页面
             // var options = new DefaultFilesOptions();
